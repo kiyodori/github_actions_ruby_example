@@ -36,6 +36,14 @@ jobs:
           USER_NAME : ${{ secrets.USER_NAME  }}
 
         run: |
-          echo "$PRIVATE_KEY" > private_key &&
-          chmod 600 private_key &&
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+
+            cd /home/ec2-user/github_actions_ruby_example &&
+            git checkout main &&
+            git fetch --all &&
+            git reset --hard origin/main &&
+            git pull origin main &&
+            bundle install &&
+            bundle exec ruby app.rb -o 0.0.0.0
+            '
