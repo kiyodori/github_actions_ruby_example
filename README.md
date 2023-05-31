@@ -1,6 +1,11 @@
 # github_actions_ruby_example
 
-sudo dnf install -y git-all ruby3.2
-gem install bundler
-bundle update --bundler
+```bash
+sudo dnf groupinstall -y "Development Tools"
+sudo dnf install -y git-all ruby3.2 ruby-devel openssl-devel
 bundle install
+```
+
+```bash
+ruby app.rb -o 0.0.0.0
+```
