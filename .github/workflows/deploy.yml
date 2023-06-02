@@ -38,11 +38,11 @@ jobs:
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
           ssh -v -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+            # アプリを新プロセスで、デタッチモードで起動する
             cd /home/ec2-user/github_actions_ruby_example &&
             git fetch --all &&
             git reset --hard origin/main &&
             bundle install &&
             lsof -t -i:4567 | xargs --no-run-if-empty kill -9 &&
-            echo 10000 &&
-            bundle exec ruby app.rb -o 0.0.0.0 -e production
+            screen -dm bundle exec ruby app.rb -o 0.0.0.0
             '
