@@ -44,5 +44,6 @@ jobs:
             bundle install &&
             lsof -t -i:4567 | xargs --no-run-if-empty kill -9 &&
             echo 10000 &&
-            bundle exec ruby app.rb -o 0.0.0.0 &
+            bundle exec ruby app.rb -o 0.0.0.0 & &&
+            echo 20000
             '
