@@ -37,11 +37,11 @@ jobs:
 
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o ServerAliveInterval=30 -o ServerAliveCountMax=120 -v -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+          ssh -v -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
             cd /home/ec2-user/github_actions_ruby_example &&
             git fetch --all &&
             git reset --hard origin/main &&
             bundle install &&
             lsof -t -i:4567 | xargs --no-run-if-empty kill -9 &&
-            nohup bundle exec ruby app.rb -o 0.0.0.0 </dev/null > /dev/null 2>&1 &
+            bundle exec ruby app.rb -o 0.0.0.0
             '
