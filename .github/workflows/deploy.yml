@@ -43,5 +43,5 @@ jobs:
             git reset --hard origin/main &&
             bundle install &&
             lsof -t -i:4567 | xargs --no-run-if-empty kill -9 &&
-            nohup bundle exec ruby app.rb -o 0.0.0.0 > /dev/null 2>&1 &
+            nohup bundle exec ruby app.rb -o 0.0.0.0 </dev/null > /dev/null 2>&1 &
             '
