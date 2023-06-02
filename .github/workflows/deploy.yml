@@ -43,5 +43,6 @@ jobs:
             git reset --hard origin/main &&
             bundle install &&
             lsof -t -i:4567 | xargs --no-run-if-empty kill -9 &&
-            bundle exec ruby app.rb -o 0.0.0.0
+            echo 10000 &&
+            bundle exec ruby app.rb -o 0.0.0.0 &
             '
