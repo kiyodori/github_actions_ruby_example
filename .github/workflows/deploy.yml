@@ -1,4 +1,4 @@
-name: CI/CD with Ruby
+name: Deploy
 
 on:
   push:
@@ -45,5 +45,6 @@ jobs:
             git reset --hard origin/main &&
             git pull origin main &&
             bundle install &&
+            lsof -t -i:4567 | xargs --no-run-if-empty kill -9 &&
             nohup bundle exec ruby app.rb -o 0.0.0.0 &
             '
